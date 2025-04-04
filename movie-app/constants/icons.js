@@ -1,0 +1,7 @@
+export const passIcon = require('../assets/icons/password.png')
+export const userIcon = require('../assets/icons/user.png')
+export const SearchIcon = require('../assets/icons/Search.png')
+export const StarIcon = require('../assets/icons/Star.png')
+export const TicketIcon = require('../assets/icons/Ticket.png')
+export const CalenderIcon = require('../assets/icons/CalendarBlank.png')
+export const ClockIcon = require('../assets/icons/Clock.png')

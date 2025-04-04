@@ -1,0 +1,5 @@
+export const OnboardingImg = require('../assets/images/popcorn.png')
+export const NoResultImg = require('../assets/images/noresult.png')
+export const Img1 = require('../assets/images/Pic1.png')
+export const Img2 = require('../assets/images/Img2.png')
+export const Img3 = require('../assets/images/Img3.png')
