@@ -48,9 +48,15 @@ const loginUser = async (req,res)=>{
 
     const user = await userModel.findOne({ Email })
 
+    if(!user){
+        return res.json({
+            error: "Invalid Credentials!"
+        })
+    }
+
     const isMatch = await bcrypt.compare(password, user.password)
 
-    if(!isMatch || !user){
+    if(!isMatch){
         return res.json({
             error: "Invalid Credentials!"
         })

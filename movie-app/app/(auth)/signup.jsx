@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, Image, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, SafeAreaView, Image, TextInput, TouchableOpacity, StatusBar } from 'react-native'
 import React from 'react'
 import { useState } from 'react'
 import { useContext } from 'react'
@@ -34,6 +34,7 @@ const signup = () => {
 
   return (
     <SafeAreaView className='w-full h-full bg-[#1E1E1E]'>
+      <StatusBar className='bg-[#1E1E1E] text-white'/>
       <View className='flex items-center justify-center w-full h-[600px]'>
         <Text className='text-white font-bold text-3xl'>Create Your Account!</Text>
         <Text className='text-sm text-[#99A1AA] mt-2'>Join us & Stay Updated With Latest Releases Of Movies!</Text>

@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TextInput, TouchableOpacity, Pressable, Image, ToastAndroid } from 'react-native'
+import { View, Text, SafeAreaView, TextInput, TouchableOpacity, Pressable, Image, ToastAndroid, StatusBar } from 'react-native'
 import React from 'react'
 import '../../global.css'
 import { useState } from 'react'
@@ -37,7 +37,7 @@ const signin = () => {
   }
   return (
     <SafeAreaView className='h-full w-full bg-[#1E1E1E]'>
-
+      <StatusBar className='bg-[#1E1E1E] text-white'/>
       <View className='flex h-[600px] gap-5 items-center justify-center'>
         <Text className='text-white font-bold text-3xl  flex items-center justify-center'>Welcome To CineVerse!</Text>
         <Text className='text-sm text-[#99A1AA]'>Sign in to your account.</Text>

@@ -44,11 +44,33 @@ const searchMovie = async (req, res) => {
     }
 }
 
+const getMoviesById = async (req,res)=>{
+    try {
+        const {movieId} = req.query
+        console.log("movieId being sent to TMDB:", movieId);
+
+        if(!movieId){
+            return res.json({
+                error: "No Movie Found!"
+            })
+        }
+        const TMDB_BASE_URL = 'https://api.themoviedb.org/3'
+        const response = await api.get(`${TMDB_BASE_URL}/movie/${movieId}`, {
+            params: {api_key: process.env.TMDB_API}
+        })
+        const responseData = response.data
+        return res.json(responseData)
+    } catch (error) {
+        console.log("An Error Occured!", error)
+    }
+}
+
 
 
 module.exports = {
     getMovies,
-    searchMovie
+    searchMovie,
+    getMoviesById
 }
 
 

@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 import { Platform, ToastAndroid } from 'react-native'
 import api from '../services/axios'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const MovieContext = createContext({})
 
@@ -40,9 +41,41 @@ export function MovieProvider({children}){
     
     }
 
+    const getMovieById = async ()=>{
+        try {
+            const token = await AsyncStorage.getItem('userToken')
+            const movieId = JSON.parse(await AsyncStorage.getItem('MovieId'))
+            console.log("Movie is: ", movieId)
+            const response = await api.get('/Movies/getMovieById', {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+                params: {
+                    movieId: movieId
+                }
+            })
+
+            const responseData = response.data
+
+            if(responseData.error){
+                if(Platform.OS == 'android' || Platform.OS == 'ios'){
+                    ToastAndroid.show(responseData.error, ToastAndroid.SHORT)
+                }
+            } else{
+                await AsyncStorage.removeItem('MovieId')
+                return responseData
+            }
+        } catch (error) {
+            if(Platform.OS == 'android' || Platform.OS == 'ios'){
+                ToastAndroid.show('An Error Occured!', ToastAndroid.SHORT)
+            }
+            console.log("An Error Occured!", error)
+        }
+    }
+
 
     return (
-        <MovieContext.Provider value={{SearchMovies, fetchMovies}}>
+        <MovieContext.Provider value={{SearchMovies, fetchMovies, getMovieById}}>
             {children}
         </MovieContext.Provider>
     )
