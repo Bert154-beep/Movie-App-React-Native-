@@ -1,13 +1,13 @@
 import { View, Text, SafeAreaView, Image, TextInput, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { useState } from 'react'
-import { useRouter } from 'expo-router'
+import { useContext } from 'react'
+import { userContext } from '../../Context/UserContext'
 
 const signup = () => {
 
-  const router = useRouter()
+  const {registerUser} = useContext(userContext)
 
-  const { registerUser } = require('../../services/authService')
 
   const icons = require('../../constants/icons')
   const [data, setdata] = useState({
@@ -20,7 +20,7 @@ const signup = () => {
   const handleSubmit = ()=>{
 
     
-    registerUser(data, router)
+    registerUser(data)
   
     
     setdata({

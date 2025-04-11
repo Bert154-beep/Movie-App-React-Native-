@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, Image, TouchableOpacity } from 'react-native'
+import { View, Text, SafeAreaView, Image, TouchableOpacity, StatusBar } from 'react-native'
 import React from 'react'
 
 const Watchlist = () => {
@@ -8,6 +8,7 @@ const Watchlist = () => {
 
   return (
     <SafeAreaView className='bg-[#1E1E1E] w-full h-full'>
+      <StatusBar className='bg-[#1E1E1E] text-white'/>
       <View className='flex w-full items-center justify-center'><Text className='font-bold text-white p-5 text-2xl'>Watch List</Text></View>
       <View className='p-6'>
         <View className='flex flex-row gap-3'>

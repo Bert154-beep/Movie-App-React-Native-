@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, Image, TouchableOpacity } from 'react-native'
+import { View, Text, SafeAreaView, Image, TouchableOpacity, StatusBar } from 'react-native'
 import React from 'react'
 
 const Moviescreen = () => {
@@ -7,6 +7,7 @@ const Moviescreen = () => {
     const icons = require('../constants/icons')
   return (
     <SafeAreaView className='w-full h-full bg-[#1E1E1E]'>
+        <StatusBar className='bg-[#1E1E1E] text-white'/>
         <View className='relative'>
             <Image className='w-full' source={images.Img2}/>
             <View className='absolute h-full flex justify-end mt-20 ml-8 '>

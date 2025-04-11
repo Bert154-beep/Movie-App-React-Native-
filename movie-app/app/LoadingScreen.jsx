@@ -1,4 +1,4 @@
-import { View, Text, ActivityIndicator, Image, SafeAreaView, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, ActivityIndicator, Image, SafeAreaView, TextInput, TouchableOpacity, StatusBar } from 'react-native'
 import React from 'react'
 
 
@@ -9,6 +9,7 @@ const LoadingScreen = () => {
 
     return (
         <SafeAreaView className='w-full h-full bg-[#1E1E1E]'>
+            <StatusBar className='bg-[#1E1E1E] text-white'/>
             <View>
                 <Text className='p-5 text-2xl text-white font-semibold'>What Do You Want To Watch?</Text>
                 <View className='m-3 p-2 rounded-3xl bg-[#3A3F47] flex items-center justify-between flex-row'>

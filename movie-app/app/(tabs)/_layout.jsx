@@ -15,7 +15,7 @@ const Tabslayout = () => {
     }}>
       <Tabs.Screen name='Movies' options={{headerShown: false, tabBarIcon: ({color})=> <Ionicons name='film' size={24} color={color}/>} } />
       <Tabs.Screen name='Watchlist' options={{headerShown: false, tabBarIcon: ({color})=> <Ionicons name='play' size={24} color={color}/>}}/>
-      <Tabs.Screen name='Profile' options={{headerShown: false , tabBarIcon: ({color})=> <Ionicons name='person' size={24} color={color}/>} } />
+      <Tabs.Screen name='Profile' options={{headerShown: false , lazy: false, tabBarIcon: ({color})=> <Ionicons name='person' size={24} color={color}/>} } />
     </Tabs>
   )
 }

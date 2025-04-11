@@ -50,7 +50,7 @@ const loginUser = async (req,res)=>{
 
     const isMatch = await bcrypt.compare(password, user.password)
 
-    if(!isMatch){
+    if(!isMatch || !user){
         return res.json({
             error: "Invalid Credentials!"
         })
@@ -59,42 +59,77 @@ const loginUser = async (req,res)=>{
      if(isMatch){
         const token = jwt.sign({
             userId: user._id,
-            name: user.name,
-            Email: user.name
+            fullName: user.fullName,
+            Email: user.Email
         }, process.env.JWT_SECRET)
 
-        res.json(token)
+        return res.json({token})
      }
 }
 
 const getUser = async (req, res) => {
     try {
-        const authHeader = req.headers.authorization;
-        console.log(authHeader)
-        if (!authHeader || !authHeader.startsWith('Bearer ')) {
-            return res.status(401).json({ error: "No token provided" });
+        const authHeader = req.headers.authorization
+
+        if(!authHeader || !authHeader.startsWith('Bearer ')){
+            return res.json({
+                error: "No Token Provided!"
+            })
         }
 
-        const token = authHeader.split(' ')[1];
+        const token = authHeader.split(' ')[1]
+        if(!token){
+            return res.json({
+                error: "Invalid Token!"
+            })
+        }
 
-        jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-            if (err) {
-                return res.status(403).json({ error: "Invalid token" });
-            }
+        jwt.verify(token, process.env.JWT_SECRET, (err,user)=>{
+            if(err) throw err
 
-            return res.json(user);
-        });
+            return res.json(user)
+        })
     } catch (error) {
-        console.error("Error in getUser:", error);
-        return res.status(500).json({ error: "An error occurred" });
+        return res.json({
+            error: "An Error Occured!", error
+        })
     }
 };
-const logoutUser = async (req,res)=>{
-    const token = req.headers['authorization']
+
+const DeleteUser = async (req,res)=>{
+    try {
+        
+        const {userId} = req.body
+
+        if(!userId){
+            return res.json({
+                error: "No User Found!"
+            })
+        }
+
+        const deletedUser = await userModel.findByIdAndDelete(userId)
+        if(!deletedUser){
+            return res.json({
+                error: "User Does not Exist!"
+            })
+        }
+
+        return res.json({
+            message: "User Deleted Successfully!",
+            user: deletedUser
+        })
+
+    } catch (error) {
+        console.log("An Error Occured!", error)
+        return res.json({
+            error: "An Error Occured!"
+        })
+    }
 }
 
 module.exports = {
     registerUser,
     loginUser,
-    getUser
+    getUser,
+    DeleteUser
 };

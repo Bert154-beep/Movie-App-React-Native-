@@ -12,7 +12,7 @@ dotenv.config()
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(cors({
-    origin: 'http://192.168.1.102:8081',
+    origin: 'http://192.168.1.103:8081',
     credentials: true
 }))
 ConnectToDB()

@@ -1,30 +1,35 @@
-import { View, Text, SafeAreaView, TextInput, TouchableOpacity, Pressable, Image } from 'react-native'
+import { View, Text, SafeAreaView, TextInput, TouchableOpacity, Pressable, Image, ToastAndroid } from 'react-native'
 import React from 'react'
 import '../../global.css'
-import { useRouter } from 'expo-router'
 import { useState } from 'react'
+import { useContext } from 'react'
+import { userContext } from '../../Context/UserContext'
+import { useRouter } from 'expo-router'
 
 
 const signin = () => {
   const icons = require('../../constants/icons')
+
   const router = useRouter()
 
-  const {loginUser} = require('../../services/authService')
+  const {loginUser} = useContext(userContext)
 
   const [data, setdata] = useState({
     Email: '',
     password: ''  
   })
 
-  const handleSubmit = ()=>{
-    loginUser(data,router)
-    
-
-    setdata({
-      Email: '',
-      password: ''
-    })
-
+  const handleSubmit = async ()=>{
+    try {
+      await loginUser(data)
+      setdata({
+        Email: '',
+        password: ''
+      })
+    } catch (error) {
+      console.log(error)
+      ToastAndroid.show('Login Failed!', ToastAndroid.SHORT)
+    }
   }
 
   const NavigateToSignUp = ()=>{
@@ -32,6 +37,7 @@ const signin = () => {
   }
   return (
     <SafeAreaView className='h-full w-full bg-[#1E1E1E]'>
+
       <View className='flex h-[600px] gap-5 items-center justify-center'>
         <Text className='text-white font-bold text-3xl  flex items-center justify-center'>Welcome To CineVerse!</Text>
         <Text className='text-sm text-[#99A1AA]'>Sign in to your account.</Text>
